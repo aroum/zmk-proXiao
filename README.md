@@ -1,4 +1,5 @@
 # zmk-proXiao
+**This branch is for proXiao v3 and newer**
   
 ZMK config fo proXiao shields. proXiao is a bluetooth controller for [Corne](https://github.com/foostan/crkbd)/[Jorne](https://github.com/joric/jorne) keyboard.
 
