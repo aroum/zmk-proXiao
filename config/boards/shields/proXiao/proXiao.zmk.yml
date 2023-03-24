@@ -6,6 +6,4 @@ url: https://github.com/aroum/proXiao/
 requires: [seeeduino_xiao_ble]
 features:
   - keys
-siblings:
-  - proXiao_left
-  - proXiao_right
+

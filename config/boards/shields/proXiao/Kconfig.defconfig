@@ -1,19 +1,9 @@
 # Copyright (c) 2020 The ZMK Contributors
 # SPDX-License-Identifier: MIT
 
-if SHIELD_PROXIAO_LEFT
+if SHIELD_PROXIAO
 
 config ZMK_KEYBOARD_NAME
-	default "proXiao"
-
-config ZMK_SPLIT_ROLE_CENTRAL
-	default y
-
-endif
-
-if SHIELD_PROXIAO_LEFT || SHIELD_PROXIAO_RIGHT
-
-config ZMK_SPLIT
-	default y
+	default "Reviung41"
 
 endif
