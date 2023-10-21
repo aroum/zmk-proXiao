@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020 The ZMK Contributors
+ * Copyright (c) 2020 Pete Johanson
  *
  * SPDX-License-Identifier: MIT
  */
@@ -9,7 +9,7 @@
 / {
 	chosen {
 		zmk,kscan = &kscan0;
-		zmk,matrix_transform = &six_column;
+		zmk,matrix_transform = &five_column;
 	};
 
 default_transform: keymap_transform_4 {
@@ -19,7 +19,7 @@ default_transform: keymap_transform_4 {
 		map = <RC(0,0)>;
 	};
 
-	seven_column: keymap_transform_0 {
+seven_column: keymap_transform_0 {
 		compatible = "zmk,matrix-transform";
 		columns = <12>;
 		rows = <4>;
@@ -73,13 +73,40 @@ RC(2,1) RC(2,2) RC(2,3) RC(2,4) RC(2,5)  RC(2,6) RC(2,7) RC(2,8) RC(2,9) RC(2,10
 
 		diode-direction = "col2row";
 		row-gpios
-            = <&xiao_d 7 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-            , <&xiao_d 8 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-            , <&xiao_d 9 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-            , <&xiao_d 10 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-			;
-		
+		= <&xiao_d 7  (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+        , <&xiao_d 8  (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+        , <&xiao_d 9  (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+        , <&xiao_d 10 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+	    ;
 	};
+};
+
+
+// The PS/2 GPIO and mouse drivers.
+/ {
+    gpio_ps2: gpio_ps2 {
+		status = "disabled";
+        compatible = "gpio-ps2";
+
+        // The two bottom left pins of the nice!nano (when it is facing down)
+        scl-gpios = <&gpio0 10 0>;
+        sda-gpios = <&gpio0 9 0>;
+    };
+};
+
+/ {
+    mouse_ps2: mouse_ps2 {
+	status = "disabled";
+        compatible = "zmk,mouse-ps2";
+        ps2-device = <&gpio_ps2>;
+
+        // Uncomment this if you have an extra free pin and
+        // want the controller to perform the Power-On-Reset
+        // instead of using a reset circuit.
+        //
+        // The bottom right pin of the nice!nano (when it is facing down)
+        rst-gpios = <&xiao_d 0 0>;
+    };
 };
 &xiao_spi { status = "disabled"; };
 &xiao_i2c { status = "disabled"; };
