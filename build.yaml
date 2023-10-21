@@ -8,5 +8,3 @@
 include:
   - board: seeeduino_xiao_ble
     shield: proXiao_left
-  - board: seeeduino_xiao_ble
-    shield: proXiao_right
